@@ -1,6 +1,7 @@
 let searchBox = document.getElementById("searchBox");
 let search = document.getElementById("search");
 const searchResults = document.getElementById("search-results");
+let form = document.getElementById("searchForm");
 
 function buildSongs(itunesData) {
   console.log(itunesData);
@@ -9,10 +10,12 @@ function buildSongs(itunesData) {
   }
 }
 
-search.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
   console.log(searchBox.value);
   const userInput = searchBox.value;
   let itunesUrl = `https://itunes.apple.com/search?term=${userInput}`;
+
+  event.preventDefault();
 
   fetch(itunesUrl, {
     method: "GET",
@@ -26,7 +29,9 @@ search.addEventListener("click", (event) => {
     .then(function (data) {
       buildSongs(data.results);
       console.log(data.results);
-      // if search has no results return message to user.
+      searchResults.innerHTML = "";
+
+      // if search has no results return message
 
       // loop artist album, name, art, and song name
       for (let song of data.results) {

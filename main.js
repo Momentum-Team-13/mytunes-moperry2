@@ -2,6 +2,7 @@ let searchBox = document.getElementById("searchBox");
 let search = document.getElementById("search");
 const searchResults = document.getElementById("search-results");
 let form = document.getElementById("searchForm");
+let audio = document.getElementById("audio");
 
 function buildSongs(itunesData) {
   console.log(itunesData);
@@ -30,8 +31,10 @@ form.addEventListener("submit", (event) => {
       buildSongs(data.results);
       console.log(data.results);
       searchResults.innerHTML = "";
-
       // if search has no results return message
+      //   .catch(err => {
+      //       console.error(err);
+      //   })
 
       // loop artist album, name, art, and song name
       for (let song of data.results) {
@@ -39,7 +42,7 @@ form.addEventListener("submit", (event) => {
         songDiv.classList.add("song-info");
         // Song Name
         let songEl = document.createElement("song");
-        songEl.classList.add("song-name");
+        songEl.classList.add("song_name");
         songEl.innerText = `"${song.trackName}"`;
         songDiv.appendChild(songEl);
         // Artist name
@@ -59,6 +62,19 @@ form.addEventListener("submit", (event) => {
         imageEl.classList.add("art");
         songDiv.appendChild(imageEl);
 
+        //audio button
+        let audioSource = document.createElement("div");
+        audioSource.classList.add(audio_source);
+        audioSource.innerText = `${song.previewUrl}`;
+        songDiv.appendChild(audioSource);
+
+        searchResults.addEventListener("click", (event) => {
+          if (event.target.classList.contains(song_name))
+            console.log(event.target);
+          audio.src = event.target.nextElementSibling.innerText;
+        });
+        // "previewUrl": ""
+        //
         searchResults.appendChild(songDiv);
       }
     });

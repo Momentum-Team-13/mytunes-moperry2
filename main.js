@@ -49,18 +49,18 @@ form.addEventListener("submit", (event) => {
         // Song Name
         let songEl = document.createElement("song");
         songEl.classList.add("song_name");
-        songEl.innerText = `"${song.trackName}"`;
+        songEl.innerText = `Song: ${song.trackName}`;
         songDiv.appendChild(songEl);
         // Artist name
         let artistDiv = document.createElement("div");
         artistDiv.classList.add("artist");
-        artistDiv.innerText = song.artistName;
+        artistDiv.innerText = `Artist: ${song.artistName} \b\r \b\r`;
         songDiv.appendChild(artistDiv);
         console.log(song.artistName);
         //Album name
         let albumDiv = document.createElement("div");
         albumDiv.classList.add("album");
-        albumDiv.innerText = song.collectionName;
+        albumDiv.innerText = `Album: ${song.collectionName} `;
         songDiv.appendChild(albumDiv);
         //Art
         let imageEl = document.createElement("img");

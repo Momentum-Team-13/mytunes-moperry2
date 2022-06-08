@@ -1,7 +1,16 @@
 .audio_source {
   display: none;
 }
-#search-results{
-    display: flex;
-    fle
+#search-results {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+h1 {
+  text-align: center;
+}
+
+#searchForm {
+  text-align: center;
 }

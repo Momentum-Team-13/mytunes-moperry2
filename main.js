@@ -36,8 +36,11 @@ form.addEventListener("submit", (event) => {
       console.log(data.results);
       searchResults.innerHTML = "";
       // if search has no results return message
-
-      //   })
+      if (data.results.length === 0) {
+        let emptyElement = document.createElement("div");
+        emptyElement.innerText = "No results found!!";
+        searchResults.appendChild(emptyElement);
+      }
 
       // loop artist album, name, art, and song name
       for (let song of data.results) {

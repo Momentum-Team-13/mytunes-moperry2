@@ -24,6 +24,10 @@ form.addEventListener("submit", (event) => {
   })
     .then(function (response) {
       // the response is the promised data
+      //error handling
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
       return response.json();
       //put the output in json format
     })
@@ -32,8 +36,7 @@ form.addEventListener("submit", (event) => {
       console.log(data.results);
       searchResults.innerHTML = "";
       // if search has no results return message
-      //   .catch(err => {
-      //       console.error(err);
+
       //   })
 
       // loop artist album, name, art, and song name
@@ -64,18 +67,22 @@ form.addEventListener("submit", (event) => {
 
         //audio button
         let audioSource = document.createElement("div");
-        audioSource.classList.add(audio_source);
+        audioSource.classList.add("audio_source");
         audioSource.innerText = `${song.previewUrl}`;
         songDiv.appendChild(audioSource);
-
-        searchResults.addEventListener("click", (event) => {
-          if (event.target.classList.contains(song_name))
-            console.log(event.target);
-          audio.src = event.target.nextElementSibling.innerText;
-        });
+        //audio player
+        let audioPlayer = document.createElement("audio");
+        audioPlayer.controls = "controls";
+        audioPlayer.src = `${song.previewUrl}`;
+        songDiv.appendChild(audioPlayer);
         // "previewUrl": ""
         //
         searchResults.appendChild(songDiv);
       }
     });
 });
+
+// searchResults.addEventListener("click", (event) => {
+//   if (event.target.classList.contains("song_name")) console.log(event.target);
+//   audio.src = event.target.nextElementSibling.innerText;
+// })
